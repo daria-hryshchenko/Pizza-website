@@ -5,7 +5,7 @@ import { PizzaItem } from '../../components/PizzaItem/PizzaItem';
 import { Sort } from '../../components/Sort/Sort';
 import SkeletonPizzaItem from '../../components/PizzaItem/SkeletonPizzaItem';
 
-export const Home = () => {
+export const Home = ({ searchValue }) => {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [categoryId, setCategoryId] = useState(0);
@@ -30,6 +30,14 @@ export const Home = () => {
       .catch((error) => console.log(error));
     window.scrollTo(0, 0);
   }, [categoryId, sortType]);
+  const pizzas = items
+    .filter((obj) => {
+      if (obj.title.toLowerCase().includes(searchValue.toLowerCase())) {
+        return true;
+      }
+      return false;
+    })
+    .map((pizza) => <PizzaItem key={pizza.id} pizza={pizza} />);
 
   return (
     <>
@@ -41,7 +49,7 @@ export const Home = () => {
       <div className="content__items">
         {isLoading
           ? [...new Array(9)].map((_, index) => <SkeletonPizzaItem key={index} />)
-          : items.map((pizza) => <PizzaItem key={pizza.id} pizza={pizza} />)}
+          : pizzas}
       </div>
     </>
   );

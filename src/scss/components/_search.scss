@@ -1,0 +1,40 @@
+@import '../variables';
+
+.search {
+  position: relative;
+
+  &__icon {
+    opacity: 0.3;
+    height: 22px;
+    width: 22px;
+    position: absolute;
+    top: 12px;
+    left: 14px;
+  }
+
+  &__input {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 12px 20px;
+    width: 400px;
+    border-radius: 10px;
+    font-size: 16px;
+    padding-left: 42px;
+    transition: all 0.15s ease-in-out;
+    &:focus {
+      border: 2px solid $orange;
+    }
+  }
+
+  &__close {
+    width: 18px;
+    height: 18px;
+    opacity: 0.2;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    transition: all 0.15s ease-in-out;
+    &:focus {
+      opacity: 0.5;
+    }
+  }
+}
