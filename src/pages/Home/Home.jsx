@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Categories } from '../../components/Categories/Categories';
 import { PizzaItem } from '../../components/PizzaItem/PizzaItem';
 import { Sort } from '../../components/Sort/Sort';
 import SkeletonPizzaItem from '../../components/PizzaItem/SkeletonPizzaItem';
 import Pagination from '../../components/Pagination/Pagination';
+import { SeachContext } from '../../App';
 
-export const Home = ({ searchValue }) => {
+export const Home = () => {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [categoryId, setCategoryId] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [sortType, setSortType] = useState({ name: 'Popularity', sortProperty: 'popularity' });
+  const { searchValue } = useContext(SeachContext);
 
   useEffect(() => {
     setIsLoading(true);
