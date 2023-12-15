@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSortType } from '../../redux/slices/filterSlice';
 
-export const Sort = ({ sortType, onClickSort }) => {
-  // const [activeIndex, setActiveIndex] = useState(0);
+export const Sort = () => {
   const [open, setOpen] = useState(false);
+
+  const dispatch = useDispatch();
+  const sortType = useSelector((state) => state.filter.sortType);
 
   const sortList = [
     { name: 'Popularity', sortProperty: 'popularity' },
@@ -12,7 +16,7 @@ export const Sort = ({ sortType, onClickSort }) => {
   ];
 
   const onClickListItem = (index) => {
-    onClickSort(index);
+    dispatch(setSortType(index));
     setOpen(false);
   };
   return (

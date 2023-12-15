@@ -1,4 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
+import { setCategoryId } from '../../redux/slices/filterSlice';
 import { Categories } from '../../components/Categories/Categories';
 import { PizzaItem } from '../../components/PizzaItem/PizzaItem';
 import { Sort } from '../../components/Sort/Sort';
@@ -7,12 +10,16 @@ import Pagination from '../../components/Pagination/Pagination';
 import { SeachContext } from '../../App';
 
 export const Home = () => {
+  const dispatch = useDispatch();
+  const { sortType, categoryId } = useSelector((state) => state.filter);
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [categoryId, setCategoryId] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const [sortType, setSortType] = useState({ name: 'Popularity', sortProperty: 'popularity' });
   const { searchValue } = useContext(SeachContext);
+
+  const onClickCategory = (id) => {
+    dispatch(setCategoryId(id));
+  };
 
   useEffect(() => {
     setIsLoading(true);
@@ -20,14 +27,13 @@ export const Home = () => {
     const order = sortType.sortProperty.includes('-') ? 'asc' : 'desc';
     const sortBy = sortType.sortProperty.replace('-', '');
     const category = categoryId > 0 ? `category=${categoryId}` : '';
-    fetch(
-      `https://654917a7dd8ebcd4ab242c38.mockapi.io/pizza/pizza?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}`,
-    )
+
+    axios
+      .get(
+        `https://654917a7dd8ebcd4ab242c38.mockapi.io/pizza/pizza?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}`,
+      )
       .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setItems(data);
+        setItems(res.data);
         setIsLoading(false);
       })
       .catch((error) => console.log(error));
@@ -45,8 +51,8 @@ export const Home = () => {
   return (
     <div className="wrap">
       <div className="content__top">
-        <Categories categoryId={categoryId} onClickCategory={(i) => setCategoryId(i)} />
-        <Sort sortType={sortType} onClickSort={(i) => setSortType(i)} />
+        <Categories categoryId={categoryId} onClickCategory={onClickCategory} />
+        <Sort />
       </div>
       <h2 className="content__title">All pizzas</h2>
       <div className="content__items">
