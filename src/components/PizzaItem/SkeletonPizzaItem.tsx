@@ -1,7 +1,9 @@
 import React from 'react';
 import ContentLoader from 'react-content-loader';
 
-const SkeletonPizzaItem = (props) => (
+interface SkeletonPizzaPropsI {}
+
+const SkeletonPizzaItem: React.FC<SkeletonPizzaPropsI> = (props) => (
   <ContentLoader
     className="pizza-block"
     speed={2}

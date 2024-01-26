@@ -2,7 +2,12 @@ import React from 'react';
 import ReactPaginate from 'react-paginate';
 import '../../scss/components/_pagination.scss';
 
-const Pagination = ({ currentPage, onChangePage }) => {
+interface PaginationPropsI {
+  currentPage: number;
+  onChangePage: (selectedPage: number) => void;
+}
+
+const Pagination: React.FC<PaginationPropsI> = ({ currentPage, onChangePage }) => {
   return (
     <ReactPaginate
       breakLabel="..."

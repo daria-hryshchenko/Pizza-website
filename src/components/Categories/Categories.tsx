@@ -1,6 +1,13 @@
+import React from 'react';
+
 const categories = ['All', 'Meat', 'Vegetarian', 'Grill', 'Spicy'];
 
-export const Categories = ({ categoryId, onClickCategory }) => {
+interface CategoriesPropsI {
+  categoryId: number;
+  onClickCategory: (index: number) => void;
+}
+
+export const Categories: React.FC<CategoriesPropsI> = ({ categoryId, onClickCategory }) => {
   return (
     <div className="categories">
       <ul>
