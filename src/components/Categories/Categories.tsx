@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 const categories = ['All', 'Meat', 'Vegetarian', 'Grill', 'Spicy'];
 
@@ -7,7 +7,7 @@ interface CategoriesPropsI {
   onClickCategory: (index: number) => void;
 }
 
-export const Categories: React.FC<CategoriesPropsI> = ({ categoryId, onClickCategory }) => {
+export const Categories: React.FC<CategoriesPropsI> = memo(({ categoryId, onClickCategory }) => {
   return (
     <div className="categories">
       <ul>
@@ -22,4 +22,4 @@ export const Categories: React.FC<CategoriesPropsI> = ({ categoryId, onClickCate
       </ul>
     </div>
   );
-};
+});

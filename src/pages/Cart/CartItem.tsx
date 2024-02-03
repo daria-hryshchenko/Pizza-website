@@ -34,6 +34,7 @@ export const CartItemBlock: React.FC<CartPropsI> = ({
   const onClickMinus = () => {
     dispatch(minusItem(id));
   };
+
   const onClickRemove = () => {
     if (window.confirm('Are you sure you want to remove?')) {
       dispatch(removeItem(id));
@@ -53,7 +54,7 @@ export const CartItemBlock: React.FC<CartPropsI> = ({
       </div>
       <div className="cart__item-count">
         <button
-          //   disabled={count === 1}
+          disabled={count === 1}
           onClick={onClickMinus}
           className="button button--outline button--circle cart__item-count-minus">
           <svg

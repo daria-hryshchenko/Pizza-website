@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { SortPropertyEnum, selectSort, setSortType } from '../../redux/slices/filterSlice';
+import { Sort, SortPropertyEnum, selectSort, setSortType } from '../../redux/slices/filterSlice';
 
 type SortItem = {
   name: string;
@@ -14,11 +14,15 @@ export const sortList: SortItem[] = [
   { name: 'A To Z', sortProperty: SortPropertyEnum.TITLE_ASC },
 ];
 
-export const SortPopup: React.FC = () => {
+type SortPopipProps = {
+  sortType: Sort;
+};
+
+export const SortPopup: React.FC<SortPopipProps> = ({ sortType }) => {
   const [open, setOpen] = useState(false);
 
   const dispatch = useDispatch();
-  const sortType = useSelector(selectSort);
+  // const sortType = useSelector(selectSort);
   const sortRef = useRef<HTMLDivElement | null>(null);
 
   const onClickListItem = (index: SortItem) => {

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CartItem, addItem, selectCartItemById } from '../../redux/slices/cartSlice';
 import { Link } from 'react-router-dom';
 
-const typeNames = ['thick', 'thin'];
+const typeNames = ['Thick Dough', 'Thin Dough'];
 
 export interface PizzaPropsI {
   id: string;

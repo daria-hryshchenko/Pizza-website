@@ -18,6 +18,7 @@ export type SearchPizzaParams = {
   sortBy: string;
   category: string;
   currentPage: string;
+  searchValue: string;
 };
 
 type Pizza = {
