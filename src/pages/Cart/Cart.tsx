@@ -4,11 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CartItemBlock } from './CartItem';
 import { clearItems, selectCart } from '../../redux/slices/cartSlice';
 import { CartEmpty } from './CartEmpty';
+import uniqid from 'uniqid';
 
 export const Cart: React.FC = () => {
   const dispatch = useDispatch();
-  const { totalPrice, items } = useSelector(selectCart);
+  const { items } = useSelector(selectCart);
   const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0);
+  const totalPrice = items.reduce((sum: number, item: any) => sum + item.count * item.price, 0);
 
   const onClickClear = () => {
     if (window.confirm('Are you sure you want to clear cart?')) {
@@ -90,18 +92,16 @@ export const Cart: React.FC = () => {
         </div>
         <div className="content__items">
           {items.map((item: any) => (
-            <CartItemBlock key={item.id} {...item} />
+            <CartItemBlock key={uniqid} {...item} />
           ))}
         </div>
         <div className="cart__bottom">
           <div className="cart__bottom-details">
             <span>
-              {' '}
-              Total pizzas: <b>{totalCount}</b>{' '}
+              Total pizzas: <b>{totalCount}</b>
             </span>
             <span>
-              {' '}
-              Order price: <b> {totalPrice * totalCount} $</b>{' '}
+              Order price: <b> {totalPrice} $</b>
             </span>
           </div>
           <div className="cart__bottom-buttons">

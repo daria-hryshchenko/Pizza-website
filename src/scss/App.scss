@@ -143,6 +143,23 @@ html {
   }
 }
 
+.pizza {
+  width: $container-width;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__wrap {
+    display: flex;
+  }
+
+  &__img {
+    display: block;
+    width: 400px;
+  }
+}
+
 .cart {
   &__top {
     display: flex;

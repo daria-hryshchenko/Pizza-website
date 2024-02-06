@@ -23,6 +23,10 @@
     &:focus {
       border: 2px solid $orange;
     }
+
+    @media (max-width: 980px) {
+      width: 300px;
+    }
   }
 
   &__close {

@@ -22,22 +22,47 @@ export const CartItemBlock: React.FC<CartPropsI> = ({
   count,
   imageUrl,
 }) => {
-  console.log(id, title, type, size, price, count, imageUrl);
   const dispatch = useDispatch();
   const onClickPlus = () => {
     dispatch(
       addItem({
         id,
+        title,
+        type,
+        size,
+        price,
+        count,
+        imageUrl,
       } as CartItem),
     );
   };
   const onClickMinus = () => {
-    dispatch(minusItem(id));
+    dispatch(
+      minusItem({
+        id,
+        title,
+        type,
+        size,
+        price,
+        count,
+        imageUrl,
+      } as CartItem),
+    );
   };
 
   const onClickRemove = () => {
     if (window.confirm('Are you sure you want to remove?')) {
-      dispatch(removeItem(id));
+      dispatch(
+        removeItem({
+          id,
+          title,
+          type,
+          size,
+          price,
+          count,
+          imageUrl,
+        } as CartItem),
+      );
     }
   };
 

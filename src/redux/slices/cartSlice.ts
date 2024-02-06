@@ -1,12 +1,9 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-
-// const getCartFromLS = () => {
-//   const data = localStorage.getItem('cart');
-//   return data ? JSON.parse(data) : [];
-// };
+import { count } from 'console';
 
 export type CartItem = {
+  tabKey: string;
   id: string;
   title: string;
   price: number;
@@ -21,8 +18,6 @@ interface CartSliceStateI {
   items: CartItem[];
 }
 
-// const cartData = getCartFromLS();
-
 const initialState: CartSliceStateI = {
   totalPrice: 0,
   items: [],
@@ -33,7 +28,12 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addItem: (state, action: PayloadAction<CartItem>) => {
-      const findItem = state.items.find((obj) => obj.id === action.payload.id);
+      const findItem = state.items.find(
+        (obj) =>
+          obj.id === action.payload.id &&
+          obj.price === action.payload.price &&
+          obj.size === action.payload.size,
+      );
       if (findItem) {
         findItem.count++;
       } else {
@@ -42,18 +42,34 @@ const cartSlice = createSlice({
           count: 1,
         });
       }
+
       state.totalPrice = state.items.reduce((sum, obj) => {
-        return obj.price * obj.count + sum;
+        return +(sum = Number(obj.price * obj.count));
       }, 0);
     },
-    minusItem: (state, action: PayloadAction<string>) => {
-      const findItem = state.items.find((obj) => obj.id === action.payload);
+    minusItem: (state, action: PayloadAction<CartItem>) => {
+      const findItem = state.items.find(
+        (obj) =>
+          obj.id === action.payload.id &&
+          obj.price === action.payload.price &&
+          obj.size === action.payload.size,
+      );
       if (findItem) {
         findItem.count--;
       }
     },
-    removeItem: (state, action: PayloadAction<string>) => {
-      state.items = state.items.filter((obj) => obj.id !== action.payload);
+    removeItem: (state, action: PayloadAction<CartItem>) => {
+      const findItem = state.items.find(
+        (obj) =>
+          obj.id === action.payload.id &&
+          obj.price === action.payload.price &&
+          obj.size === action.payload.size,
+      );
+
+      if (findItem) {
+        let indexPizzaRemove = state.items.indexOf(findItem);
+        state.items.splice(indexPizzaRemove, 1);
+      }
     },
     clearItems: (state) => {
       state.items = [];

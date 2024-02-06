@@ -6,12 +6,15 @@ interface PizzaI {
   imageUrl: string;
   title: string;
   price: number;
+  key: number;
 }
 
-export const FullPizza: React.FC = () => {
+export const FullPizza: React.FC = (key) => {
   const [pizza, setPizza] = useState<PizzaI | undefined>();
   const { id } = useParams();
   const navigate = useNavigate();
+
+  console.log(key);
 
   useEffect(() => {
     async function fetchPizza() {
@@ -33,10 +36,14 @@ export const FullPizza: React.FC = () => {
   }
 
   return (
-    <div className="container">
-      <img src={pizza.imageUrl} />
-      <h2>{pizza.title}</h2>
-      <h4>{pizza.price} $</h4>
+    <div className="pizza">
+      <div className="pizza__wrap">
+        <img src={pizza.imageUrl} className="pizza__img" />
+      </div>
+      <div className="">
+        <h2>{pizza.title}</h2>
+        <h4>{pizza.price} $</h4>
+      </div>
     </div>
   );
 };
