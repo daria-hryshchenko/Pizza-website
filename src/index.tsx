@@ -10,8 +10,7 @@ const rootElement = document.getElementById('root');
 if (rootElement) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
-    <BrowserRouter>
-      {/* basename="/pizza-website/" */}
+    <BrowserRouter basename="/pizza-website/">
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <App />
