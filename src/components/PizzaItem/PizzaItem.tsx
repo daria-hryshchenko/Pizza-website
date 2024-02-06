@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CartItem, addItem, selectCartItemById } from '../../redux/slices/cartSlice';
 import { Link } from 'react-router-dom';
-import { selectCart } from '../../redux/slices/cartSlice';
 
 const typeNames = ['Thick Dough', 'Thin Dough'];
 
@@ -28,7 +27,6 @@ export const PizzaItem: React.FC<PizzaPropsI> = ({
 }) => {
   const dispatch = useDispatch();
   const cartItem = useSelector(selectCartItemById(id));
-  const { items } = useSelector(selectCart);
 
   const [activeType, setActiveType] = useState(0);
   const [activeSize, setActiveSize] = useState(0);

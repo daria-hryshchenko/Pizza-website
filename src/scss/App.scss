@@ -147,16 +147,40 @@ html {
   width: $container-width;
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+
+  &__button {
+    display: flex;
+    width: 100%;
+    margin-bottom: 50px;
+  }
 
   &__wrap {
     display: flex;
+    margin: 20px auto;
+    width: 100%;
+    justify-content: space-around;
+
+    @media (max-width: 760px) {
+      flex-direction: column;
+    }
   }
 
   &__img {
     display: block;
     width: 400px;
+  }
+
+  &__details {
+    display: flex;
+    width: 40%;
+    flex-direction: column;
+    gap: 20px;
+
+    p {
+      font-size: 16px;
+      line-height: 1.8rem;
+    }
   }
 }
 
